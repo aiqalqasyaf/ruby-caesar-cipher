@@ -1,21 +1,32 @@
+# frozen_string_literal: true
+
 def caesar_cipher(sentence, shift)
+  special_chars = [' ', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '[', ']', '{', '}', ';',
+                   ':', '\'', '"', ',', '.', '<', '>', '/', '?', '\\', '|', '`', '~']
+
   ascii = sentence.split('')
 
   ascii = ascii.map do |character|
-    character.ord
+    if special_chars.include?(character)
+      character
+    else
+      character.ord
+    end
   end
 
   shifted_ascii = ascii.map do |ascii|
-    shift.times do
-      ascii -= 26 if ascii == 90 || ascii == 122
-      ascii += 1
+    if ascii.is_a? Numeric
+      shift.times do
+        ascii -= 26 if [90, 122].include?(ascii)
+        ascii += 1
+      end
     end
     ascii
   end
 
-  shifted_sentence = shifted_ascii.map { |word| word.chr }
+  shifted_result = shifted_ascii.map(&:chr)
 
-  shifted_sentence.join('')
+  shifted_result.join('')
 end
 
-puts caesar_cipher('Danial', 5)
+puts caesar_cipher('I love Toyota', 5)
