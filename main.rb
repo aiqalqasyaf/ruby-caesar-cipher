@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
 def caesar_cipher(sentence, shift)
-  special_chars = [' ', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '[', ']', '{', '}', ';',
-                   ':', '\'', '"', ',', '.', '<', '>', '/', '?', '\\', '|', '`', '~']
-
-  ascii = sentence.chars.map { |c| special_chars.include?(c) ? c : c.ord }
+  ascii = sentence.chars.map { |c| c.match?(/[[:alpha:]]/) ? c.ord : c }
 
   shifted_ascii = ascii.map do |ascii|
     if ascii.is_a? Numeric
