@@ -4,11 +4,7 @@ def caesar_cipher(sentence, shift)
   special_chars = [' ', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '[', ']', '{', '}', ';',
                    ':', '\'', '"', ',', '.', '<', '>', '/', '?', '\\', '|', '`', '~']
 
-  ascii = sentence.split('')
-
-  ascii = ascii.map do |character|
-    special_chars.include?(character) ? character : character.ord
-  end
+  ascii = sentence.chars.map { |c| special_chars.include?(c) ? c : c.ord }
 
   shifted_ascii = ascii.map do |ascii|
     if ascii.is_a? Numeric
