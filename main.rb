@@ -7,11 +7,7 @@ def caesar_cipher(sentence, shift)
   ascii = sentence.split('')
 
   ascii = ascii.map do |character|
-    if special_chars.include?(character)
-      character
-    else
-      character.ord
-    end
+    special_chars.include?(character) ? character : character.ord
   end
 
   shifted_ascii = ascii.map do |ascii|
@@ -24,9 +20,7 @@ def caesar_cipher(sentence, shift)
     ascii
   end
 
-  shifted_result = shifted_ascii.map(&:chr)
-
-  shifted_result.join('')
+  shifted_ascii.map(&:chr).join('')
 end
 
 puts caesar_cipher('I love Toyota', 5)
